@@ -109,27 +109,32 @@ NAMES_DATA = [
 ]
 
 def load_env():
-    """Load environment variables from .env file"""
-    try:
-        with open(ENV_FILE, 'r', encoding='utf-8') as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith('#') and '=' in line:
-                    key, value = line.split('=', 1)
-                    if value:  # Only set if value is not empty
-                        os.environ[key.strip()] = value.strip()
-    except FileNotFoundError:
-        print(f"Error: .env file not found at {ENV_FILE}")
-        raise
+    """Load environment variables from .env file if it exists."""
+    if not ENV_FILE.exists():
+        return
+
+    with open(ENV_FILE, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith('#') and '=' in line:
+                key, value = line.split('=', 1)
+                if value:  # Only set if value is not empty
+                    os.environ[key.strip()] = value.strip()
+
 
 def get_telegram_credentials():
-    """Get Telegram bot token and chat ID"""
+    """Get Telegram bot token and chat ID from environment or .env."""
     token = os.getenv('TELEGRAM_BOT_TOKEN')
     chat_id = os.getenv('TELEGRAM_CHAT_ID')
-    
+
     if not token or not chat_id:
-        raise ValueError("TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not found in .env")
-    
+        load_env()
+        token = os.getenv('TELEGRAM_BOT_TOKEN')
+        chat_id = os.getenv('TELEGRAM_CHAT_ID')
+
+    if not token or not chat_id:
+        raise ValueError("TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not found in environment or .env")
+
     return token, chat_id
 
 def load_history():
