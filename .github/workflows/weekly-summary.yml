@@ -2,8 +2,8 @@ name: Weekly Summary
 
 on:
   schedule:
-    # 매주 일요일 오후 7시 KST (UTC 10:00 = 한국시간 일요일 오후 7시)
-    - cron: '0 10 * * 0'
+    # 매주 일요일 오후 6시 KST (UTC 9:00 = 한국시간 일요일 오후 6시)
+    - cron: '0 9 * * 0'
   workflow_dispatch:  # 수동 실행용
 
 jobs:
