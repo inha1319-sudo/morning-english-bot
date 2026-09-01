@@ -1,0 +1,28 @@
+name: Evening Check
+
+on:
+  schedule:
+    # 매일 한국 시간 오후 7시 (UTC 10:00 = 한국시간 다음날 7시)
+    - cron: '0 10 * * *'
+  workflow_dispatch:  # 수동 실행용
+
+jobs:
+  evening-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: pip install requests
+    
+    - name: Run evening check
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: python evening_check.py
