@@ -35,5 +35,10 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add 복습목록.md
-        git commit -m "Update weekly review list" || true
+        if git diff --cached --quiet; then
+          echo "No changes to the weekly review list."
+          exit 0
+        fi
+        git commit -m "Update weekly review list"
+        git pull --rebase origin main
         git push
