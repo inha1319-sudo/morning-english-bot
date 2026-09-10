@@ -145,11 +145,13 @@ def group_messages_by_time(messages, time_window_minutes=10):
     groups.append(current_group)
     return groups
 
-def extract_feedback_data(text):
-    """Extract [내 문장 / 고친 문장 / 실수종류] from feedback"""
+def extract_all_feedbacks(text):
+    """Extract all [내 문장 / 고친 문장 / 실수종류] from feedback"""
     # 패턴: "내가 쓴 문장: ... / 고쳐진 문장: ... / 실수종류: ..."
     # 또는 줄바꿈으로 구분된 형식
     # 또는 ChatGPT 형식: "피드백 1: ... -> ... | 종류"
+    feedbacks = []
+
     patterns = [
         # ChatGPT 형식: "피드백 1: 원문 -> 수정문 | 종류"
         r'(?:피드백\s*\d+\s*:\s*)?([^-]+?)\s*->\s*([^|]+?)\s*\|\s*(.+?)(?:\n|$)',
@@ -161,15 +163,23 @@ def extract_feedback_data(text):
     ]
 
     for pattern in patterns:
-        match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
-        if match:
-            return {
+        matches = re.finditer(pattern, text, re.IGNORECASE | re.DOTALL)
+        for match in matches:
+            feedback = {
                 "original": match.group(1).strip(),
                 "corrected": match.group(2).strip(),
                 "error_type": match.group(3).strip()
             }
+            # 중복 제거
+            if not any(f["original"] == feedback["original"] for f in feedbacks):
+                feedbacks.append(feedback)
 
-    return None
+    return feedbacks if feedbacks else None
+
+def extract_feedback_data(text):
+    """Extract [내 문장 / 고친 문장 / 실수종류] from feedback (backward compatibility)"""
+    result = extract_all_feedbacks(text)
+    return result[0] if result else None
 
 def count_weekly_errors(error_type):
     """Count how many times this error type appeared this week"""
@@ -291,11 +301,11 @@ def main():
     
     for group in message_groups:
         combined_text = "\n".join([msg.get("text", "") for msg in group])
-        
-        # Extract feedback data
-        feedback = extract_feedback_data(combined_text)
-        if feedback:
-            all_feedbacks.append(feedback)
+
+        # Extract all feedback data (supports multiple feedbacks in one message)
+        feedbacks = extract_all_feedbacks(combined_text)
+        if feedbacks:
+            all_feedbacks.extend(feedbacks)
     
     if all_feedbacks:
         # Create and send feedback message
