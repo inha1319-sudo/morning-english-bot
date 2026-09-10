@@ -149,14 +149,17 @@ def extract_feedback_data(text):
     """Extract [내 문장 / 고친 문장 / 실수종류] from feedback"""
     # 패턴: "내가 쓴 문장: ... / 고쳐진 문장: ... / 실수종류: ..."
     # 또는 줄바꿈으로 구분된 형식
+    # 또는 ChatGPT 형식: "피드백 1: ... -> ... | 종류"
     patterns = [
+        # ChatGPT 형식: "피드백 1: 원문 -> 수정문 | 종류"
+        r'(?:피드백\s*\d+\s*:\s*)?([^-]+?)\s*->\s*([^|]+?)\s*\|\s*(.+?)(?:\n|$)',
         # 슬래시로 구분
         r'내(?:가\s+)?쓴\s+(?:문장|표현)[:\s]+([^/]+)\s*/\s*고(?:쳐진|친)\s+(?:문장|표현)[:\s]+([^/]+)\s*/\s*(?:실수|오류)(?:의?\s+)?(?:종류|타입)[:\s]+([^/\n]+)',
         r'내\s+:\s*([^/]+)/고쳐진\s+:\s*([^/]+)/실수종류\s+:\s*([^/\n]+)',
         # 줄바꿈으로 구분
         r'내(?:가\s+)?쓴\s+(?:문장|표현)[:\s]+([^\n]+)\n\s*고(?:쳐진|친)\s+(?:문장|표현)[:\s]+([^\n]+)\n\s*(?:실수|오류)(?:의?\s+)?(?:종류|타입)[:\s]+([^\n]+)',
     ]
-    
+
     for pattern in patterns:
         match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
         if match:
@@ -165,7 +168,7 @@ def extract_feedback_data(text):
                 "corrected": match.group(2).strip(),
                 "error_type": match.group(3).strip()
             }
-    
+
     return None
 
 def count_weekly_errors(error_type):
