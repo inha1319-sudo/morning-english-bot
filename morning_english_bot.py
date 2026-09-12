@@ -46,8 +46,9 @@ EXPRESSIONS_DATA = [
     ("I can see both sides.", "둘 다 이해가 돼."),
 ]
 
-# 주제 데이터 (의견이 갈리는 주제)
+# 주제 데이터 (OPIC 준비용: 일상 + 의견)
 TOPICS_DATA = [
+    # === 의견 주제 (기존) ===
     {
         "topic": "원격 근무 vs 사무실 근무",
         "situation": "당신은 새로운 팀 리더인 Alex와 회사의 업무 방식에 대해 얘기하고 있습니다. 요즘 원격 근무와 사무실 근무 중 어느 쪽이 더 나을지 고민 중입니다.",
@@ -97,6 +98,98 @@ TOPICS_DATA = [
         "topic": "개인 정보 보호 vs 보안",
         "situation": "당신은 보안 전문가인 Morgan과 카페에서 개인정보 유출 뉴스에 대해 이야기 중입니다. 프라이버시를 얼마나 포기해야 안전할 수 있는지 토론하고 있습니다.",
         "first_dialogue": "How much privacy should we be willing to give up for better security?"
+    },
+
+    # === 일상 주제 (OPIC 맞춤형) ===
+    {
+        "topic": "좋아하는 영화",
+        "situation": "당신은 친구 Blake와 영화 관람 후 카페에 앉아 있습니다. 최근에 본 영화와 선호하는 장르에 대해 얘기하고 있습니다.",
+        "first_dialogue": "What was the last movie you watched? Did you like it?"
+    },
+    {
+        "topic": "주말 계획",
+        "situation": "당신은 동료 Cameron과 금요일 오후에 대화하고 있습니다. 다가오는 주말을 어떻게 보낼지 계획을 나누고 있습니다.",
+        "first_dialogue": "What do you usually do on weekends?"
+    },
+    {
+        "topic": "공원 방문",
+        "situation": "당신은 친구 Dakota와 공원 산책을 하고 있습니다. 공원을 좋아하는 이유와 자주 가는 활동에 대해 얘기하고 있습니다.",
+        "first_dialogue": "How often do you come to the park? What do you like about it?"
+    },
+    {
+        "topic": "해변 휴가",
+        "situation": "당신은 친구 Drew와 해변 여행 후 이야기하고 있습니다. 해변에서 무엇을 하는 걸 가장 좋아하는지 대화 중입니다.",
+        "first_dialogue": "Do you enjoy going to the beach? What's your favorite thing to do there?"
+    },
+    {
+        "topic": "요리와 음식",
+        "situation": "당신은 친구 Finley와 집에서 함께 요리하고 있습니다. 즐겨 하는 요리와 요리하는 이유에 대해 얘기하고 있습니다.",
+        "first_dialogue": "Do you like cooking? What's your favorite dish to make?"
+    },
+    {
+        "topic": "운동과 건강",
+        "situation": "당신은 피트니스 센터에서 친구 Harley를 만났습니다. 운동 습관과 건강 유지 방법에 대해 대화 중입니다.",
+        "first_dialogue": "What kind of exercise do you do regularly? How do you stay healthy?"
+    },
+    {
+        "topic": "조깅과 러닝",
+        "situation": "당신은 조깅 모임에서 새로운 친구 Haven을 만났습니다. 조깅을 시작한 이유와 자주 달리는 장소에 대해 얘기하고 있습니다.",
+        "first_dialogue": "How long have you been jogging? Do you run alone or with friends?"
+    },
+    {
+        "topic": "국내 여행 계획",
+        "situation": "당신은 여행사 직원인 Jazz와 국내 여행 패키지를 살펴보고 있습니다. 자주 가는 여행지와 여행 스타일에 대해 대화 중입니다.",
+        "first_dialogue": "Where do you usually travel within Korea? What do you like to do on trips?"
+    },
+    {
+        "topic": "최근 여행 경험",
+        "situation": "당신은 친구 Keenan과 최근 다녀온 여행에 대해 이야기하고 있습니다. 가장 인상적인 경험과 추천할 만한 장소에 대해 나누고 있습니다.",
+        "first_dialogue": "Tell me about your last trip. Where did you go and what did you do?"
+    },
+    {
+        "topic": "집에서의 휴가",
+        "situation": "당신은 친구 Logan과 휴가 계획에 대해 얘기하고 있습니다. 바쁜 일정 속에서 집에서 쉬는 것의 가치에 대해 대화 중입니다.",
+        "first_dialogue": "How do you prefer to spend your vacation? At home or traveling?"
+    },
+    {
+        "topic": "가족과의 시간",
+        "situation": "당신은 친구 Morgan과 주말에 가족과 함께 보내는 시간에 대해 얘기하고 있습니다. 함께 즐겨 하는 활동과 가족 관계에 대해 대화 중입니다.",
+        "first_dialogue": "What do you like to do with your family in your free time?"
+    },
+    {
+        "topic": "음악 감상",
+        "situation": "당신은 친구 Parker와 카페에서 좋아하는 음악에 대해 얘기하고 있습니다. 선호하는 장르와 최근 즐겨 듣는 아티스트에 대해 대화 중입니다.",
+        "first_dialogue": "What kind of music do you enjoy listening to?"
+    },
+    {
+        "topic": "취미 활동",
+        "situation": "당신은 커뮤니티 센터에서 친구 Quinn과 만났습니다. 각자의 취미 활동과 시간을 내서 하는 이유에 대해 얘기하고 있습니다.",
+        "first_dialogue": "What hobbies do you have? How often do you get to do them?"
+    },
+    {
+        "topic": "건강한 생활 습관",
+        "situation": "당신은 의사인 Ryan과 건강한 생활 방식에 대해 상담하고 있습니다. 식습관과 운동, 수면 등 일상 건강 관리에 대해 대화 중입니다.",
+        "first_dialogue": "What do you do to maintain a healthy lifestyle?"
+    },
+    {
+        "topic": "요리 실력",
+        "situation": "당신은 친구 Sidney와 요리에 대해 얘기하고 있습니다. 요리 경험과 가장 잘하는 음식, 배우고 싶은 요리에 대해 대화 중입니다.",
+        "first_dialogue": "How good are you at cooking? What's the hardest dish you've tried to make?"
+    },
+    {
+        "topic": "계절별 활동",
+        "situation": "당신은 친구 Tyler와 각 계절마다 즐기는 활동에 대해 얘기하고 있습니다. 봄, 여름, 가을, 겨울 각각에 선호하는 활동에 대해 대화 중입니다.",
+        "first_dialogue": "What's your favorite season? What do you like to do during that time?"
+    },
+    {
+        "topic": "일과 생활의 균형",
+        "situation": "당신은 친구 Vega와 일과 여가시간의 균형에 대해 얘기하고 있습니다. 일을 마친 후 개인 시간을 어떻게 활용하는지 대화 중입니다.",
+        "first_dialogue": "How do you balance work and your personal life?"
+    },
+    {
+        "topic": "외식 vs 집에서 요리",
+        "situation": "당신은 배우자 또는 친구 Wren과 저녁 계획을 세우고 있습니다. 외식이 좋은지, 집에서 요리하는 게 좋은지에 대해 의견을 나누고 있습니다.",
+        "first_dialogue": "Do you prefer eating out at restaurants or cooking at home?"
     },
 ]
 
