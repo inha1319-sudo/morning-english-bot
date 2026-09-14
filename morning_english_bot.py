@@ -46,61 +46,9 @@ EXPRESSIONS_DATA = [
     ("I can see both sides.", "둘 다 이해가 돼."),
 ]
 
-# 주제 데이터 (OPIC 준비용: 일상 + 의견)
+# 주제 데이터 (OPIC 준비용: 일상 주제만)
 TOPICS_DATA = [
-    # === 의견 주제 (기존) ===
-    {
-        "topic": "원격 근무 vs 사무실 근무",
-        "situation": "당신은 새로운 팀 리더인 Alex와 회사의 업무 방식에 대해 얘기하고 있습니다. 요즘 원격 근무와 사무실 근무 중 어느 쪽이 더 나을지 고민 중입니다.",
-        "first_dialogue": "Do you think working from home is better than being in an office?"
-    },
-    {
-        "topic": "소셜 미디어의 영향",
-        "situation": "당신은 Jordan이라는 친구와 카페에서 만났습니다. 요즘 젊은 세대의 소셜 미디어 사용에 대해 논의 중입니다.",
-        "first_dialogue": "How do you feel about how much time people spend on social media?"
-    },
-    {
-        "topic": "전공 선택의 중요성",
-        "situation": "당신은 대학 상담사인 Morgan과 진로 상담을 하고 있습니다. 학생들이 돈이 되는 직업을 택해야 하는지, 흥미 있는 분야를 택해야 하는지 의견이 나뉩니다.",
-        "first_dialogue": "Should students choose a major based on earning potential or passion?"
-    },
-    {
-        "topic": "육아와 경력",
-        "situation": "당신은 동료인 Sam과 퇴근 후 대화 중입니다. 육아 책임과 경력 추구 사이에서의 균형에 대해 얘기하고 있습니다.",
-        "first_dialogue": "Is it possible to balance raising kids with having an ambitious career?"
-    },
-    {
-        "topic": "도시 vs 시골 생활",
-        "situation": "당신은 이사를 고민 중인 친구 Casey와 통화 중입니다. 도시의 편의성과 시골의 평온함 중 어느 것이 더 중요한지 논의하고 있습니다.",
-        "first_dialogue": "Do you think living in a big city is worth the cost and hassle?"
-    },
-    {
-        "topic": "기술이 삶을 나아지게 했는가",
-        "situation": "당신은 조부모 세대인 Taylor와 저녁 식사를 하고 있습니다. 요즘 기술이 정말 우리 삶을 더 나아지게 했는지에 대해 토론하고 있습니다.",
-        "first_dialogue": "Has technology really made our lives better or just more complicated?"
-    },
-    {
-        "topic": "여행: 계획 vs 즉흥",
-        "situation": "당신은 여행 친구인 Riley와 다음 휴가 계획을 짜고 있습니다. 세세하게 계획을 짜야 하는지 아니면 즉흥적으로 가야 하는지 의견이 다릅니다.",
-        "first_dialogue": "Do you prefer planning every detail of a trip or just winging it?"
-    },
-    {
-        "topic": "학교 체벌",
-        "situation": "당신은 학부모인 Jamie와 자녀 교육 방식에 대해 얘기 중입니다. 학교에서의 엄격한 훈육이 필요한지, 아니면 너무 가혹한지 의견을 나누고 있습니다.",
-        "first_dialogue": "Do you think schools are too strict or not strict enough with discipline?"
-    },
-    {
-        "topic": "가격 vs 품질",
-        "situation": "당신은 쇼핑몰에서 친구 Alex를 만났습니다. 비싼 명품과 저렴한 대량 생산 제품 중 어느 것이 더 가치 있는지 의견이 나뉩니다.",
-        "first_dialogue": "Do you think expensive brands are worth the price, or is it just marketing?"
-    },
-    {
-        "topic": "개인 정보 보호 vs 보안",
-        "situation": "당신은 보안 전문가인 Morgan과 카페에서 개인정보 유출 뉴스에 대해 이야기 중입니다. 프라이버시를 얼마나 포기해야 안전할 수 있는지 토론하고 있습니다.",
-        "first_dialogue": "How much privacy should we be willing to give up for better security?"
-    },
-
-    # === 일상 주제 (OPIC 맞춤형) ===
+    # === 일상 주제 (OPIC 스피킹 준비) ===
     {
         "topic": "좋아하는 영화",
         "situation": "당신은 친구 Blake와 영화 관람 후 카페에 앉아 있습니다. 최근에 본 영화와 선호하는 장르에 대해 얘기하고 있습니다.",
