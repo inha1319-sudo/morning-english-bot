@@ -13,10 +13,18 @@ CHATGPT_INSTRUCTION_FILE = SCRIPT_DIR / "ChatGPT지시문.md"
 REVIEW_LIST_FILE = SCRIPT_DIR / "복습목록.md"
 
 # 목표 표현 데이터 (표현, 한국어 뜻)
-# YouTube 쉐도잉 표현들 추가 예정
+# YouTube 쉐도잉 표현들
 EXPRESSIONS_DATA = [
-    # 여기에 YouTube 쉐도잉 표현들을 추가해주세요
-    # 형식: ("영어 표현", "한국어 뜻"),
+    ("To be honest with you", "솔직히 말해서"),
+    ("As a matter of fact", "사실은"),
+    ("Speaking of which", "말이 나와서 말인데"),
+    ("Come to think of it", "생각해 보니"),
+    ("What I'm trying to say is", "내 말의 요점은"),
+    ("Long story short", "한마디로 줄이자면"),
+    ("In a nutshell", "요약하자면"),
+    ("On top of that", "게다가"),
+    ("Last but not least", "마지막으로 중요한 건"),
+    ("Don't get me wrong", "오해하지 마"),
 ]
 
 # 주제 데이터 (OPIC 준비용: 일상 주제만)
