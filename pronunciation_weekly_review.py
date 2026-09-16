@@ -11,6 +11,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 SCRIPT_DIR = Path(__file__).parent
 ENV_FILE = SCRIPT_DIR / ".env"
 FEEDBACK_FILE = SCRIPT_DIR / "발음피드백.md"
+PRONUNCIATION_INSTRUCTION_FILE = SCRIPT_DIR / "ChatGPT단어시험지시문.md"
 
 def load_env():
     """Load environment variables from .env file"""
@@ -93,6 +94,7 @@ def analyze_feedback(content):
 
     analysis = {
         "total_expressions": 0,
+        "expressions_list": [],
         "weakest_expressions": [],
         "common_issues": {},
         "days_practiced": set()
@@ -102,13 +104,14 @@ def analyze_feedback(content):
     expr_pattern = r'### 표현 \d+: (.+?)\n'
     expressions = re.findall(expr_pattern, content)
     analysis["total_expressions"] = len(expressions)
+    analysis["expressions_list"] = expressions[:10]  # 최대 10개
 
     # Extract dates practiced
     date_pattern = r'## (\d{4}-\d{2}-\d{2})'
     dates = re.findall(date_pattern, content)
     analysis["days_practiced"] = set(dates)
 
-    # Extract weakest expressions (those mentioned in 특히 아쉬웠던 표현)
+    # Extract weakest expressions
     weakest_pattern = r'\*\*특히 아쉬웠던 표현\*\*: (.+?)(?=\n|$)'
     weakest_matches = re.findall(weakest_pattern, content)
     for match in weakest_matches:
@@ -142,7 +145,7 @@ def create_review_message(analysis):
     # Weakest expressions
     if analysis["weakest_expressions"]:
         lines.append("<b>⚠️ 특히 아쉬웠던 표현 (다시 연습하기)</b>")
-        for expr in analysis["weakest_expressions"][:5]:  # Top 5
+        for expr in analysis["weakest_expressions"][:5]:
             lines.append(f"• {expr}")
         lines.append("")
 
@@ -150,16 +153,43 @@ def create_review_message(analysis):
     if analysis["common_issues"]:
         lines.append("<b>🔧 공통 문제점 (주의하세요)</b>")
         sorted_issues = sorted(analysis["common_issues"].items(), key=lambda x: x[1], reverse=True)
-        for issue, count in sorted_issues[:3]:  # Top 3
+        for issue, count in sorted_issues[:3]:
             lines.append(f"• {issue} (나타난 횟수: {count}회)")
         lines.append("")
 
-    lines.append("<b>💡 다음주 복습 계획</b>")
-    lines.append("위의 약한 표현들과 공통 문제점 중심으로")
-    lines.append("집중 연습하고 ChatGPT에 더 자세한 피드백을")
-    lines.append("요청해보세요!")
+    lines.append("<b>📚 이제 단어 시험을 봐볼까요?</b>")
+    lines.append("다음 메시지의 ChatGPT 지시문을 복사해서")
+    lines.append("새 대화에 붙여넣고 start를 보내세요!")
 
     return "\n".join(lines)
+
+def create_word_test_instruction(expressions):
+    """Create word test instruction for ChatGPT"""
+    if not expressions:
+        return None
+
+    # Format expressions for template
+    expr_text = ""
+    for i, expr in enumerate(expressions, 1):
+        expr_text += f"{i}. {expr}\n"
+
+    instruction = f"""이번주 배운 영어 표현들의 뜻을 테스트합니다.
+
+[표현 목록]
+{expr_text}
+
+[단어 시험 규칙]
+1. 한국어로만 진행.
+2. 위 표현들 중에서 하나씩 뜻을 묻고, 사용자가 답하게 함.
+3. 한 번에 한 표현씩. "~의 뜻이 뭐야?"라고 물어보기.
+4. 사용자가 답하면 맞는지 평가.
+5. 틀렸으면 정답을 알려주고 같은 표현으로 다시 한번 물어보기.
+6. 맞으면 다음 표현으로 넘어가기.
+7. 모든 표현을 다 테스트하면 "다 끝났어. wrap up해봐"라고 하기.
+
+아직 시작 전. "준비 완료."라고만 하고 멈춰."""
+
+    return instruction
 
 def send_telegram_message(token, chat_id, text):
     """Send message to Telegram"""
@@ -196,10 +226,19 @@ def main():
     analysis = analyze_feedback(this_week)
 
     # Create and send review message
-    message = create_review_message(analysis)
-    send_telegram_message(token, chat_id, message)
+    review_message = create_review_message(analysis)
+    send_telegram_message(token, chat_id, review_message)
 
-    print(f"Sent weekly review for {analysis['total_expressions']} expressions")
+    # Create and send word test instruction
+    if analysis["expressions_list"]:
+        word_test = create_word_test_instruction(analysis["expressions_list"])
+        if word_test:
+            # Send as code block
+            escaped = word_test.replace("<", "&lt;").replace(">", "&gt;")
+            instruction_message = f"<pre><code>{escaped}</code></pre>"
+            send_telegram_message(token, chat_id, instruction_message)
+
+    print(f"Sent weekly review for {analysis['total_expressions']} expressions with word test")
 
 if __name__ == "__main__":
     main()
