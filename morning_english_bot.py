@@ -326,92 +326,110 @@ TOPICS_DATA = [
     {
         "topic": "좋아하는 영화",
         "situation": "당신은 친구 Blake와 영화 관람 후 카페에 앉아 있습니다. 최근에 본 영화와 선호하는 장르에 대해 얘기하고 있습니다.",
-        "first_dialogue": "What was the last movie you watched? Did you like it?"
+        "first_dialogue": "What was the last movie you watched? Did you like it?",
+        "expressions": ["All-time favorite", "Plot", "Storyline", "Plot twist", "Spoiler", "Cinematography", "Cast", "Director", "Genre", "Action-packed", "Tear-jerker", "Thought-provoking", "Top-notch", "Second to none", "Out of this world", "Breathtaking", "Mind-blowing", "Mediocre"]
     },
     {
         "topic": "주말 계획",
         "situation": "당신은 동료 Cameron과 금요일 오후에 대화하고 있습니다. 다가오는 주말을 어떻게 보낼지 계획을 나누고 있습니다.",
-        "first_dialogue": "What do you usually do on weekends?"
+        "first_dialogue": "What do you usually do on weekends?",
+        "expressions": ["Go-to place", "Regular haunt", "Kill time", "Lose track of time", "Spend quality time", "Vibe", "Cozy atmosphere", "Hustle and bustle", "Hidden gem", "Hot spot", "A must-visit", "Be on cloud nine", "Over the moon", "Make one's day", "Chill out", "Recharge my battery", "Feel refreshed", "Packed with", "Atmosphere", "Electric"]
     },
     {
         "topic": "공원 방문",
         "situation": "당신은 친구 Dakota와 공원 산책을 하고 있습니다. 공원을 좋아하는 이유와 자주 가는 활동에 대해 얘기하고 있습니다.",
-        "first_dialogue": "How often do you come to the park? What do you like about it?"
+        "first_dialogue": "How often do you come to the park? What do you like about it?",
+        "expressions": ["Take a stroll", "Jogging trail", "Fresh air", "Greenery", "Bench", "Fountain", "Playground", "Walk my dog", "Enjoy the breeze", "Cherry blossoms", "Foliage", "Picnic", "Ride a bike", "Be on cloud nine", "Over the moon", "Make one's day"]
     },
     {
         "topic": "해변 휴가",
         "situation": "당신은 친구 Drew와 해변 여행 후 이야기하고 있습니다. 해변에서 무엇을 하는 걸 가장 좋아하는지 대화 중입니다.",
-        "first_dialogue": "Do you enjoy going to the beach? What's your favorite thing to do there?"
+        "first_dialogue": "Do you enjoy going to the beach? What's your favorite thing to do there?",
+        "expressions": ["Enjoy the breeze", "Picnic", "Breathtaking", "Mind-blowing", "Be on cloud nine", "Over the moon", "Make one's day", "Fresh air", "Out of this world", "Romantic", "Sunbathe", "Swim", "Relax", "Tan", "Sandy", "Waves"]
     },
     {
         "topic": "요리와 음식",
         "situation": "당신은 친구 Finley와 집에서 함께 요리하고 있습니다. 즐겨 하는 요리와 요리하는 이유에 대해 얘기하고 있습니다.",
-        "first_dialogue": "Do you like cooking? What's your favorite dish to make?"
+        "first_dialogue": "Do you like cooking? What's your favorite dish to make?",
+        "expressions": ["Eat a balanced diet", "Picky", "Picky eater", "Bargain", "Steal", "Bang for the buck", "Reasonable price", "Grocery shopping", "In bulk", "Sold out", "User-friendly", "Go-to place", "Regular haunt", "Portion", "Serve", "Fresh"]
     },
     {
         "topic": "운동과 건강",
         "situation": "당신은 피트니스 센터에서 친구 Harley를 만났습니다. 운동 습관과 건강 유지 방법에 대해 대화 중입니다.",
-        "first_dialogue": "What kind of exercise do you do regularly? How do you stay healthy?"
+        "first_dialogue": "What kind of exercise do you do regularly? How do you stay healthy?",
+        "expressions": ["Work out", "Get back in shape", "Lead a sedentary lifestyle", "Call in sick", "Feel under the weather", "Come down with the flu", "Recover from", "Keep up with", "Struggle with", "Get the hang of it", "Morning person", "Night owl", "Be a creature of habit", "Chill out", "Pass with flying colors", "Burn the midnight oil", "Pull an all-nighter", "Squeeze in", "Have a hectic schedule", "Be packed with"]
     },
     {
         "topic": "조깅과 러닝",
         "situation": "당신은 조깅 모임에서 새로운 친구 Haven을 만났습니다. 조깅을 시작한 이유와 자주 달리는 장소에 대해 얘기하고 있습니다.",
-        "first_dialogue": "How long have you been jogging? Do you run alone or with friends?"
+        "first_dialogue": "How long have you been jogging? Do you run alone or with friends?",
+        "expressions": ["Take a stroll", "Jogging trail", "Fresh air", "Work out", "Ride a bike", "Enjoy the breeze", "Morning person", "Night owl", "Pull an all-nighter", "Have a hectic schedule", "Be packed with", "Squeeze in", "Procrastinate", "Feel refreshed", "Breathtaking", "Be on cloud nine"]
     },
     {
         "topic": "국내 여행 계획",
         "situation": "당신은 여행사 직원인 Jazz와 국내 여행 패키지를 살펴보고 있습니다. 자주 가는 여행지와 여행 스타일에 대해 대화 중입니다.",
-        "first_dialogue": "Where do you usually travel within Korea? What do you like to do on trips?"
+        "first_dialogue": "Where do you usually travel within Korea? What do you like to do on trips?",
+        "expressions": ["Hidden gem", "Hot spot", "A must-visit", "Tourist trap", "Rip-off", "Bang for the buck", "Reasonable price", "Long story short", "Come to think of it", "Speaking of which", "It just crossed my mind", "Go with the flow", "Take advantage of", "Look forward to", "End up", "Go-to place", "Regular haunt", "Travel"]
     },
     {
         "topic": "최근 여행 경험",
         "situation": "당신은 친구 Keenan과 최근 다녀온 여행에 대해 이야기하고 있습니다. 가장 인상적인 경험과 추천할 만한 장소에 대해 나누고 있습니다.",
-        "first_dialogue": "Tell me about your last trip. Where did you go and what did you do?"
+        "first_dialogue": "Tell me about your last trip. Where did you go and what did you do?",
+        "expressions": ["Speaking of which", "Come to think of it", "Let's put it this way", "If I remember correctly", "Correct me if I'm wrong", "Breathtaking", "Mind-blowing", "Out of this world", "Be on cloud nine", "Over the moon", "Make one's day", "Interestingly enough", "Believe it or not", "To be honest with you", "As a matter of fact", "Honestly", "Actually", "Does that make sense?"]
     },
     {
         "topic": "집에서의 휴가",
         "situation": "당신은 친구 Logan과 휴가 계획에 대해 얘기하고 있습니다. 바쁜 일정 속에서 집에서 쉬는 것의 가치에 대해 대화 중입니다.",
-        "first_dialogue": "How do you prefer to spend your vacation? At home or traveling?"
+        "first_dialogue": "How do you prefer to spend your vacation? At home or traveling?",
+        "expressions": ["Spend quality time", "Kill time", "Lose track of time", "Chill out", "Recharge my battery", "Feel refreshed", "Mixed feelings", "Torn between A and B", "Cozy atmosphere", "Vibe", "Lead a sedentary lifestyle", "Procrastinate", "Renovate", "Remodel", "Spacious", "Roomy", "Messy", "Spotless"]
     },
     {
         "topic": "가족과의 시간",
         "situation": "당신은 친구 Morgan과 주말에 가족과 함께 보내는 시간에 대해 얘기하고 있습니다. 함께 즐겨 하는 활동과 가족 관계에 대해 대화 중입니다.",
-        "first_dialogue": "What do you like to do with your family in your free time?"
+        "first_dialogue": "What do you like to do with your family in your free time?",
+        "expressions": ["Close-knit", "Drift apart", "Keep in touch", "Lose touch", "Bump into", "Hit it off", "See eye to eye", "Have a falling out", "Make up", "Look up to", "Take after", "Role model", "Spend quality time", "Be on cloud nine", "Over the moon", "Make one's day", "Down to earth", "Easy-going"]
     },
     {
         "topic": "음악 감상",
         "situation": "당신은 친구 Parker와 카페에서 좋아하는 음악에 대해 얘기하고 있습니다. 선호하는 장르와 최근 즐겨 듣는 아티스트에 대해 대화 중입니다.",
-        "first_dialogue": "What kind of music do you enjoy listening to?"
+        "first_dialogue": "What kind of music do you enjoy listening to?",
+        "expressions": ["Soundtrack", "Catchy", "Upbeat", "Soothing", "Lyrics", "Touching", "Relatable", "Sing along", "Live performance", "Concert venue", "Packed with", "Atmosphere", "Electric", "Goose bumps", "Second to none", "Top-notch", "All-time favorite", "Tear-jerker"]
     },
     {
         "topic": "취미 활동",
         "situation": "당신은 커뮤니티 센터에서 친구 Quinn과 만났습니다. 각자의 취미 활동과 시간을 내서 하는 이유에 대해 얘기하고 있습니다.",
-        "first_dialogue": "What hobbies do you have? How often do you get to do them?"
+        "first_dialogue": "What hobbies do you have? How often do you get to do them?",
+        "expressions": ["Be hooked on", "Be obsessed with", "Be into", "Have a thing for", "Be a big fan of", "Not my cup of tea", "It's not my thing", "Go-to place", "Regular haunt", "Kill time", "Lose track of time", "Spend quality time", "Window shopping", "Impulse buying", "Fashion conscious", "Trendsetter", "Hidden gem", "Hot spot"]
     },
     {
         "topic": "건강한 생활 습관",
         "situation": "당신은 의사인 Ryan과 건강한 생활 방식에 대해 상담하고 있습니다. 식습관과 운동, 수면 등 일상 건강 관리에 대해 대화 중입니다.",
-        "first_dialogue": "What do you do to maintain a healthy lifestyle?"
+        "first_dialogue": "What do you do to maintain a healthy lifestyle?",
+        "expressions": ["Work out", "Get back in shape", "Lead a sedentary lifestyle", "Eat a balanced diet", "Call in sick", "Feel under the weather", "Come down with the flu", "Recover from", "Keep up with", "Struggle with", "Get the hang of it", "Picky", "Picky eater", "Morning person", "Night owl", "Be a creature of habit", "Chill out", "Procrastinate", "Burn the midnight oil", "Slacker"]
     },
     {
         "topic": "요리 실력",
         "situation": "당신은 친구 Sidney와 요리에 대해 얘기하고 있습니다. 요리 경험과 가장 잘하는 음식, 배우고 싶은 요리에 대해 대화 중입니다.",
-        "first_dialogue": "How good are you at cooking? What's the hardest dish you've tried to make?"
+        "first_dialogue": "How good are you at cooking? What's the hardest dish you've tried to make?",
+        "expressions": ["Eat a balanced diet", "Picky", "Picky eater", "Come down with the flu", "Figure out", "Sort it out", "Fix a problem", "Deal with", "Come up with", "Get the hang of it", "Pass with flying colors", "Hit the books", "You know what I mean?", "Does that make sense?", "Reasonable price", "Bang for the buck"]
     },
     {
         "topic": "계절별 활동",
         "situation": "당신은 친구 Tyler와 각 계절마다 즐기는 활동에 대해 얘기하고 있습니다. 봄, 여름, 가을, 겨울 각각에 선호하는 활동에 대해 대화 중입니다.",
-        "first_dialogue": "What's your favorite season? What do you like to do during that time?"
+        "first_dialogue": "What's your favorite season? What do you like to do during that time?",
+        "expressions": ["Cherry blossoms", "Foliage", "Take a stroll", "Enjoy the breeze", "Picnic", "Ride a bike", "Go-to place", "Hot spot", "Hidden gem", "Breathtaking", "Be on cloud nine", "Over the moon", "Cozy atmosphere", "Vibe"]
     },
     {
         "topic": "일과 생활의 균형",
         "situation": "당신은 친구 Vega와 일과 여가시간의 균형에 대해 얘기하고 있습니다. 일을 마친 후 개인 시간을 어떻게 활용하는지 대화 중입니다.",
-        "first_dialogue": "How do you balance work and your personal life?"
+        "first_dialogue": "How do you balance work and your personal life?",
+        "expressions": ["Have a hectic schedule", "Be packed with", "Squeeze in", "Procrastinate", "Pull an all-nighter", "Burn the midnight oil", "Cram for an exam", "Pass with flying colors", "Slacker", "Couch potato", "Lead a sedentary lifestyle", "Morning person", "Night owl", "Be a creature of habit", "Chill out", "Recharge my battery", "Feel refreshed", "Mixed feelings", "Torn between A and B", "Call it a day", "Blow off some steam"]
     },
     {
         "topic": "외식 vs 집에서 요리",
         "situation": "당신은 배우자 또는 친구 Wren과 저녁 계획을 세우고 있습니다. 외식이 좋은지, 집에서 요리하는 게 좋은지에 대해 의견을 나누고 있습니다.",
-        "first_dialogue": "Do you prefer eating out at restaurants or cooking at home?"
+        "first_dialogue": "Do you prefer eating out at restaurants or cooking at home?",
+        "expressions": ["Eat a balanced diet", "Picky", "Picky eater", "Reasonable price", "Bang for the buck", "Rip-off", "Tourist trap", "User-friendly", "Go-to place", "Regular haunt", "Hidden gem", "Hot spot", "A must-visit", "Bargain", "Steal", "On sale", "For sale", "Grocery shopping"]
     },
 ]
 
@@ -484,9 +502,21 @@ def get_unused_topic():
     
     return random.choice(available)
 
-def get_three_expressions():
-    """Get 3 random expressions"""
-    return random.sample(EXPRESSIONS_DATA, 3)
+def get_three_expressions(topic_obj):
+    """Get 3 random expressions matching the topic"""
+    expr_names = topic_obj.get("expressions", [])
+    if not expr_names:
+        # Fallback: return random expressions if topic has no specific mapping
+        return random.sample(EXPRESSIONS_DATA, 3)
+
+    # Filter EXPRESSIONS_DATA to get only expressions for this topic
+    matching_exprs = [e for e in EXPRESSIONS_DATA if e[0] in expr_names]
+
+    if not matching_exprs:
+        return random.sample(EXPRESSIONS_DATA, 3)
+
+    # Return up to 3 random expressions from matching set
+    return random.sample(matching_exprs, min(3, len(matching_exprs)))
 
 def get_random_name():
     """Get a random name"""
@@ -629,10 +659,10 @@ def main():
     # Load environment
     load_env()
     token, chat_id = get_telegram_credentials()
-    
+
     # Select today's topic and data
     topic_data = get_unused_topic()
-    expressions = get_three_expressions()
+    expressions = get_three_expressions(topic_data)
     name = get_random_name()
     weak_point = get_weak_point()
     
