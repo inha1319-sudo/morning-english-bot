@@ -13,37 +13,10 @@ CHATGPT_INSTRUCTION_FILE = SCRIPT_DIR / "ChatGPT지시문.md"
 REVIEW_LIST_FILE = SCRIPT_DIR / "복습목록.md"
 
 # 목표 표현 데이터 (표현, 한국어 뜻)
+# YouTube 쉐도잉 표현들 추가 예정
 EXPRESSIONS_DATA = [
-    ("Those little splurges add up, too.", "그렇게 조금씩 한 사치들이 결국 쌓이는 거지."),
-    ("It's a vicious cycle.", "그건 악순환이야."),
-    ("Saving feels like a chore.", "저축하는 게 귀찮은 일처럼 느껴지긴 하지."),
-    ("I get what you're saying.", "네 말 알겠어."),
-    ("That's the whole point.", "그게 핵심이야."),
-    ("It goes both ways.", "양쪽 다 그런 거야."),
-    ("I hear what you're saying.", "내가 너 말 들었고."),
-    ("At the end of the day.", "결국."),
-    ("It depends on how you look at it.", "어떻게 보느냐에 따라 다르지."),
-    ("That's a fair point.", "그건 타당한 주장이야."),
-    ("Let's agree to disagree.", "의견은 다르지만 존중하자."),
-    ("I'm not sure I follow.", "뭔 말인지 좀 잘 모르겠는데."),
-    ("That's debatable.", "그건 논쟁의 여지가 있어."),
-    ("I see it differently.", "나는 다르게 봐."),
-    ("It's not black and white.", "까맣게 하얗게 하는 건 아니야."),
-    ("There's a reason for that.", "그럴 만한 이유가 있지."),
-    ("I totally get where you're coming from.", "네가 왜 그렇게 생각하는지 알겠어."),
-    ("That being said.", "하지만."),
-    ("Ideally, yes, but realistically...", "이상적으로는 맞지만 현실적으로는..."),
-    ("You make a good point.", "그건 좋은 포인트네."),
-    ("I never thought of it that way.", "그런 각도로는 생각해 본 적이 없는데."),
-    ("That's easier said than done.", "말은 쉬워도 하기는 힘들지."),
-    ("It's complicated.", "복잡해."),
-    ("I'm torn on this.", "이건 정하기 힘들어."),
-    ("That's a double-edged sword.", "양날의 검이네."),
-    ("There's no one-size-fits-all solution.", "만능 해결책은 없어."),
-    ("It's not that simple.", "단순하지 않아."),
-    ("I beg to differ.", "난 다르게 생각해."),
-    ("You have a point.", "일리가 있어."),
-    ("I can see both sides.", "둘 다 이해가 돼."),
+    # 여기에 YouTube 쉐도잉 표현들을 추가해주세요
+    # 형식: ("영어 표현", "한국어 뜻"),
 ]
 
 # 주제 데이터 (OPIC 준비용: 일상 주제만)
