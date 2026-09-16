@@ -1,0 +1,33 @@
+name: Pronunciation Evening Bot
+
+on:
+  schedule:
+    # 6:00 PM KST = 09:00 UTC (매일)
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: pronunciation-evening
+  cancel-in-progress: true
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run pronunciation evening bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python pronunciation_evening_check.py
