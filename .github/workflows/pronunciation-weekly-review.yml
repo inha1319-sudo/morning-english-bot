@@ -28,6 +28,6 @@ jobs:
 
       - name: Run pronunciation weekly review bot
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          PRONUNCIATION_BOT_TOKEN: ${{ secrets.PRONUNCIATION_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python pronunciation_weekly_review.py
