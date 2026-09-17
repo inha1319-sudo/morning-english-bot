@@ -29,16 +29,16 @@ def load_env():
 
 def get_telegram_credentials():
     """Get Telegram bot token and chat ID"""
-    token = os.getenv('PRONUNCIATION_BOT_TOKEN')
+    token = os.getenv('TELEGRAM_BOT_TOKEN')
     chat_id = os.getenv('TELEGRAM_CHAT_ID')
 
     if not token or not chat_id:
         load_env()
-        token = os.getenv('PRONUNCIATION_BOT_TOKEN')
+        token = os.getenv('TELEGRAM_BOT_TOKEN')
         chat_id = os.getenv('TELEGRAM_CHAT_ID')
 
     if not token or not chat_id:
-        raise ValueError("PRONUNCIATION_BOT_TOKEN or TELEGRAM_CHAT_ID not found")
+        raise ValueError("TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not found")
 
     return token, chat_id
 
@@ -93,8 +93,17 @@ def extract_pronunciation_feedback(text):
     내 발음: ...
     평가: ...
     개선점: ...
+
+    Also extracts sentence if provided in the same message.
     """
     feedbacks = []
+    sentence = None
+
+    # Try to extract sentence if it exists (sentence that user provided)
+    # Common patterns: "문장:" or just a longer English sentence
+    sentence_match = re.search(r'문장:\s*(.+?)(?=\n표현:|표현:|$)', text, re.DOTALL)
+    if sentence_match:
+        sentence = sentence_match.group(1).strip()
 
     # Split by "표현:" to find multiple feedback blocks
     blocks = re.split(r'(^|\n)(표현:)', text)
@@ -115,6 +124,7 @@ def extract_pronunciation_feedback(text):
                     "pronunciation": pron_match.group(1).strip(),
                     "evaluation": eval_match.group(1).strip(),
                     "improvement": improve_match.group(1).strip() if improve_match else "",
+                    "sentence": sentence,
                 }
                 feedbacks.append(feedback)
 
@@ -149,6 +159,8 @@ def save_feedback(date, feedbacks, weekly_summary):
 
         for i, fb in enumerate(feedbacks, 1):
             f.write(f"### 표현 {i}: {fb['expression']}\n")
+            if fb.get('sentence'):
+                f.write(f"- **문장**: {fb['sentence']}\n")
             f.write(f"- **내 발음**: {fb['pronunciation']}\n")
             f.write(f"- **평가**: {fb['evaluation']}\n")
             if fb['improvement']:

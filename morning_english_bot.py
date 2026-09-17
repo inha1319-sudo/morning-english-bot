@@ -569,46 +569,31 @@ def escape_html(text):
     return text
 
 def create_first_message(topic_data, expressions, weak_point):
-    """Create the first message"""
+    """Create the first message - new format"""
     lines = []
-    
-    # 주제와 상황
+
+    # 주제
     lines.append(f"<b>주제:</b> {escape_html(topic_data['topic'])}")
-    lines.append(f"<b>상황:</b> {escape_html(topic_data['situation'])}")
     lines.append("")
-    
-    # 목표 표현 (가려짐)
-    lines.append("<b>목표 표현:</b>")
+
+    # OPIC 스타일 상황
+    lines.append(f"{escape_html(topic_data['situation'])}")
+    lines.append("")
+
+    # 주요 표현 (뜻 포함)
+    lines.append("<b>주요 표현:</b>")
     for i, (eng, kor) in enumerate(expressions, 1):
-        spoiler_eng = f"<tg-spoiler>{escape_html(eng)}</tg-spoiler>"
-        lines.append(f"{i}. {escape_html(kor)}")
-        lines.append(f"   {spoiler_eng}")
+        lines.append(f"{i}. {escape_html(eng)} - {escape_html(kor)}")
     lines.append("")
-    
-    # 학습법 안내
-    lines.append("<b>학습법:</b>")
-    lines.append("1. 다음 메시지 상자 눌러 복사")
-    lines.append("2. ChatGPT 새 대화에 붙여 넣고 전송")
-    lines.append("3. Ready. 오면 start 보내고 음성 켜기")
-    lines.append("4. 끝나면 wrap up 보내기")
-    lines.append("5. 나온 교정을 복사해서 이 봇에게 보내기")
-    lines.append("")
-    
-    # 막힐 때 쓸 말
-    lines.append("<b>막힐 때:</b>")
-    lines.append("• Explain that in Korean?")
-    lines.append("• Can you repeat that again?")
-    lines.append("• I'm confused.")
-    lines.append("")
-    
-    # 추가 안내
-    lines.append("음성 연습 시간이 없으면 오늘은 그냥 채팅으로만 답을 보내세요.")
-    
-    # 약점 있으면 추가
-    if weak_point and weak_point != "시제":
-        lines.insert(4, f"<b>다시 보기:</b> {escape_html(weak_point)}")
-        lines.insert(5, "")
-    
+
+    # 사용 방법
+    lines.append("<b>사용 방법:</b>")
+    lines.append("1. 다음 메시지(ChatGPT 지시문) 복사")
+    lines.append("2. ChatGPT 새 대화에 붙여넣기")
+    lines.append("3. 당신이 말하는 동안 ChatGPT는 조용히 듣기만 함")
+    lines.append("4. 끝나면 'wrap up'이라고 말하기")
+    lines.append("5. 나온 피드백 확인하기")
+
     return "\n".join(lines)
 
 def create_second_message(filled_instruction):
@@ -682,6 +667,12 @@ def main():
         "상황": topic_data["situation"],
         "주제": topic_data["topic"],
         "레벨": "20",  # You can adjust this
+        "표현1": expressions[0][0] if len(expressions) > 0 else "",
+        "표현1_뜻": expressions[0][1] if len(expressions) > 0 else "",
+        "표현2": expressions[1][0] if len(expressions) > 1 else "",
+        "표현2_뜻": expressions[1][1] if len(expressions) > 1 else "",
+        "표현3": expressions[2][0] if len(expressions) > 2 else "",
+        "표현3_뜻": expressions[2][1] if len(expressions) > 2 else "",
         "오늘의표현": "\n".join([f'"{eng}" (뜻: {kor})' for eng, kor in expressions]),
         "지난주약점": weak_point,
         "날짜": datetime.now().strftime("%Y-%m-%d"),

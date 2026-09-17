@@ -28,16 +28,16 @@ def load_env():
 
 def get_telegram_credentials():
     """Get Telegram bot token and chat ID"""
-    token = os.getenv('PRONUNCIATION_BOT_TOKEN')
+    token = os.getenv('TELEGRAM_BOT_TOKEN')
     chat_id = os.getenv('TELEGRAM_CHAT_ID')
 
     if not token or not chat_id:
         load_env()
-        token = os.getenv('PRONUNCIATION_BOT_TOKEN')
+        token = os.getenv('TELEGRAM_BOT_TOKEN')
         chat_id = os.getenv('TELEGRAM_CHAT_ID')
 
     if not token or not chat_id:
-        raise ValueError("PRONUNCIATION_BOT_TOKEN or TELEGRAM_CHAT_ID not found")
+        raise ValueError("TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not found")
 
     return token, chat_id
 
@@ -73,17 +73,20 @@ def extract_this_week_feedback(content):
         except:
             pass
 
+    # Remove duplicate dates
+    this_week_dates = list(set(this_week_dates))
+
     if not this_week_dates:
         return None
 
     # Extract content for this week
     this_week_content = ""
     for date_str in this_week_dates:
-        # Find the section for this date
-        pattern = f'## {date_str}.*?(?=## |$)'
-        match = re.search(pattern, content, re.DOTALL)
-        if match:
-            this_week_content += match.group(0)
+        # Find all sections for this date
+        pattern = f'## {date_str}.*?(?=\n## |$)'
+        matches = re.findall(pattern, content, re.DOTALL)
+        for match in matches:
+            this_week_content += match
 
     return this_week_content if this_week_content else None
 
@@ -100,11 +103,20 @@ def analyze_feedback(content):
         "days_practiced": set()
     }
 
-    # Extract all feedback entries
+    # Extract all feedback entries (expression + optional sentence)
     expr_pattern = r'### 표현 \d+: (.+?)\n'
     expressions = re.findall(expr_pattern, content)
-    analysis["total_expressions"] = len(expressions)
-    analysis["expressions_list"] = expressions[:10]  # 최대 10개
+
+    # Remove duplicate expressions
+    seen = set()
+    unique_expressions = []
+    for expr in expressions:
+        if expr not in seen:
+            unique_expressions.append(expr)
+            seen.add(expr)
+
+    analysis["total_expressions"] = len(unique_expressions)
+    analysis["expressions_list"] = unique_expressions[:35]  # 최대 35개 (일주일)
 
     # Extract dates practiced
     date_pattern = r'## (\d{4}-\d{2}-\d{2})'
@@ -184,7 +196,7 @@ def create_word_test_instruction(expressions):
 3. 사용자가 그 표현의 뜻을 한국어로 답하기.
 4. 사용자가 답하면 맞는지 평가.
 5. 틀렸으면 정답을 알려주고 같은 표현으로 다시 한번 출제하기.
-6. 맞으면 "맞아! 다음."이라고만 하고 다음 표현으로 넘어가기.
+6. 맞으면 "맞아!"라고 한 후 바로 다음 표현을 출제하기. (사용자가 "다음"이라고 말할 때까지 기다리지 말고 즉시 출제)
 7. 모든 표현을 다 테스트하면 "다 끝났어. wrap up해봐"라고 하기.
 8. 별표, 우물정자, 번호, 제목 쓰지 마. 자연스러운 한국어 문장만.
 
