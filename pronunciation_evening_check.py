@@ -29,16 +29,16 @@ def load_env():
 
 def get_telegram_credentials():
     """Get Telegram bot token and chat ID"""
-    token = os.getenv('TELEGRAM_BOT_TOKEN')
+    token = os.getenv('PRONUNCIATION_BOT_TOKEN')
     chat_id = os.getenv('TELEGRAM_CHAT_ID')
 
     if not token or not chat_id:
         load_env()
-        token = os.getenv('TELEGRAM_BOT_TOKEN')
+        token = os.getenv('PRONUNCIATION_BOT_TOKEN')
         chat_id = os.getenv('TELEGRAM_CHAT_ID')
 
     if not token or not chat_id:
-        raise ValueError("TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID not found")
+        raise ValueError("PRONUNCIATION_BOT_TOKEN or TELEGRAM_CHAT_ID not found")
 
     return token, chat_id
 
