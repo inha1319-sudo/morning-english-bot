@@ -26,6 +26,16 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      - name: Debug - Check environment variables
+        env:
+          PRONUNCIATION_BOT_TOKEN: ${{ secrets.PRONUNCIATION_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          echo "PRONUNCIATION_BOT_TOKEN length: ${#PRONUNCIATION_BOT_TOKEN}"
+          echo "TELEGRAM_CHAT_ID length: ${#TELEGRAM_CHAT_ID}"
+          if [ -z "$PRONUNCIATION_BOT_TOKEN" ]; then echo "ERROR: PRONUNCIATION_BOT_TOKEN is empty"; fi
+          if [ -z "$TELEGRAM_CHAT_ID" ]; then echo "ERROR: TELEGRAM_CHAT_ID is empty"; fi
+
       - name: Run pronunciation morning bot
         env:
           PRONUNCIATION_BOT_TOKEN: ${{ secrets.PRONUNCIATION_BOT_TOKEN }}
