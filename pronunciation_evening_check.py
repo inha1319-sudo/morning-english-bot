@@ -85,10 +85,18 @@ def get_unread_messages(token, chat_id):
 
     return unread
 
+# 다음 항목이 시작되는 지점. ChatGPT 답변은 줄바꿈 없이 한 줄로 이어져 오기도 한다.
+FIELD_END = r'(?=\s*(?:표현:|내 발음:|평가:|개선점:|===|특히 아쉬웠던 표현:|공통 문제점:)|\s*$)'
+
+def extract_field(label, block):
+    """Extract one labeled field, whether fields are on separate lines or not"""
+    match = re.search(label + r':\s*(.+?)' + FIELD_END, block, re.DOTALL)
+    return match.group(1).strip() if match else None
+
 def extract_pronunciation_feedback(text):
     """
     Extract pronunciation feedback from text.
-    Format:
+    Format (fields may be separated by newlines or by spaces):
     표현: ...
     내 발음: ...
     평가: ...
@@ -100,33 +108,27 @@ def extract_pronunciation_feedback(text):
     sentence = None
 
     # Try to extract sentence if it exists (sentence that user provided)
-    # Common patterns: "문장:" or just a longer English sentence
-    sentence_match = re.search(r'문장:\s*(.+?)(?=\n표현:|표현:|$)', text, re.DOTALL)
+    sentence_match = re.search(r'(?:^|\n)문장:\s*(.+?)(?=\s*표현:|$)', text, re.DOTALL)
     if sentence_match:
         sentence = sentence_match.group(1).strip()
 
-    # Split by "표현:" to find multiple feedback blocks
-    blocks = re.split(r'(^|\n)(표현:)', text)
+    # 주간 복습 부분의 "특히 아쉬웠던 표현:"이 표현 항목으로 잡히지 않게 먼저 잘라낸다
+    body = re.split(r'===\s*주간 복습용|특히 아쉬웠던 표현:', text)[0]
 
-    for i in range(1, len(blocks), 2):
-        if i + 1 < len(blocks):
-            block = "표현:" + blocks[i + 1]
+    for chunk in re.split(r'(?:^|\s)표현:', body)[1:]:
+        block = "표현:" + chunk
+        expression = extract_field('표현', block)
+        pronunciation = extract_field('내 발음', block)
+        evaluation = extract_field('평가', block)
 
-            # Extract each field
-            expr_match = re.search(r'표현:\s*(.+?)(?=\n내 발음:|$)', block, re.DOTALL)
-            pron_match = re.search(r'내 발음:\s*(.+?)(?=\n평가:|$)', block, re.DOTALL)
-            eval_match = re.search(r'평가:\s*(.+?)(?=\n개선점:|$)', block, re.DOTALL)
-            improve_match = re.search(r'개선점:\s*(.+?)(?=\n|$)', block, re.DOTALL)
-
-            if expr_match and pron_match and eval_match:
-                feedback = {
-                    "expression": expr_match.group(1).strip(),
-                    "pronunciation": pron_match.group(1).strip(),
-                    "evaluation": eval_match.group(1).strip(),
-                    "improvement": improve_match.group(1).strip() if improve_match else "",
-                    "sentence": sentence,
-                }
-                feedbacks.append(feedback)
+        if expression and pronunciation and evaluation:
+            feedbacks.append({
+                "expression": expression,
+                "pronunciation": pronunciation,
+                "evaluation": evaluation,
+                "improvement": extract_field('개선점', block) or "",
+                "sentence": sentence,
+            })
 
     return feedbacks if feedbacks else None
 
@@ -134,15 +136,13 @@ def extract_weekly_summary(text):
     """Extract weekly summary from feedback"""
     summary = {}
 
-    # Extract "특히 아쉬웠던 표현"
-    summary_match = re.search(r'=== 주간 복습용 ===\n특히 아쉬웠던 표현:\s*(.+?)(?=\n공통 문제점:|$)', text, re.DOTALL)
-    if summary_match:
-        summary["weakest_expressions"] = summary_match.group(1).strip()
+    weakest = extract_field('특히 아쉬웠던 표현', text)
+    if weakest:
+        summary["weakest_expressions"] = weakest
 
-    # Extract "공통 문제점"
-    problem_match = re.search(r'공통 문제점:\s*(.+?)(?=\n|$)', text, re.DOTALL)
-    if problem_match:
-        summary["common_issues"] = problem_match.group(1).strip()
+    issues = extract_field('공통 문제점', text)
+    if issues:
+        summary["common_issues"] = issues
 
     return summary if summary else None
 
