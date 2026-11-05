@@ -7,7 +7,24 @@ GitHub Actions 기반이므로 **컴퓨터가 꺼져있어도 항상 실행됨**
 
 ---
 
-## 🤖 봇 3개
+## 🚦 현재 상태 (2026-11-05)
+
+| 봇 | 워크플로 | 상태 |
+|----|----------|------|
+| **표현봇(발음봇)** | `pronunciation-morning` / `pronunciation-evening` / `pronunciation-weekly-review` | **켜짐** |
+| 오픽 회화봇 | `morning-english` / `evening-check` / `weekly-summary` | 꺼짐 (GitHub에서 수동 비활성화, 코드는 유지) |
+
+### 표현봇 (토큰: `PRONUNCIATION_BOT_TOKEN`)
+- `pronunciation_morning_bot.py`: 매일 07:00 KST, 표현 5개 + `ChatGPT발음지시문.md` 발송
+- `pronunciation_evening_check.py`: 매일 18:00 KST, 피드백을 `발음피드백.md`에 기록. 워크플로가 `발음피드백.md`, `발음읽음기록.json`을 저장소에 자동 커밋
+- `pronunciation_weekly_review.py`: 매주 금요일 18:00 KST, 이번주 피드백 복습 + 단어 시험
+
+### `archive/`
+일회성 스크립트(`add_examples*.py` 등), 예전 실행 방식(`.replit`, `register_task.ps1`, `아침영어.bat`), 쓰지 않는 `pronunciation_always_bot.py`를 보관. 어떤 워크플로도 실행하지 않음. `pronunciation_always_bot.py`는 표현봇과 같은 토큰으로 메시지를 가져가므로 저녁 봇과 동시에 돌리지 말 것.
+
+---
+
+## 🤖 오픽 회화봇 3개 (현재 꺼짐)
 
 ### 1️⃣ **아침 봇** (`morning_english_bot.py`)
 - **실행 시간**: 매일 오전 7:00 KST (UTC 22:00)
@@ -20,7 +37,7 @@ GitHub Actions 기반이므로 **컴퓨터가 꺼져있어도 항상 실행됨**
 - **외부 의존**: `ChatGPT지시문.md`, `history.json`
 
 ### 2️⃣ **저녁 봇** (`evening_check.py`)
-- **실행 시간**: 매일 오후 7:00 KST (UTC 10:00)
+- **실행 시간**: 매일 오후 6:00 KST (UTC 09:00)
 - **역할**:
   - 텔레그램에서 사용자가 보낸 피드백 메시지 수신
   - 형식: `내가 쓴 문장: ... / 고쳐진 문장: ... / 실수의 종류: ...` (또는 줄바꿈 형식)
@@ -30,7 +47,7 @@ GitHub Actions 기반이므로 **컴퓨터가 꺼져있어도 항상 실행됨**
 - **외부 의존**: `읽음기록.json` (중복 처리 방지)
 
 ### 3️⃣ **주간 봇** (`weekly_summary.py`)
-- **실행 시간**: 매주 일요일 오후 7:00 KST (UTC 일요일 10:00)
+- **실행 시간**: 매주 일요일 오후 6:00 KST (UTC 일요일 09:00)
 - **역할**:
   - 지난 7일간의 `실수장부.md` 데이터 분석
   - 대화 횟수, 자주 틀린 실수 종류 TOP 3 계산
@@ -151,5 +168,5 @@ GitHub Actions 기반이므로 **컴퓨터가 꺼져있어도 항상 실행됨**
 
 ---
 
-**마지막 업데이트**: 2026-09-01
+**마지막 업데이트**: 2026-11-05
 **담당자**: Claude (AI Assistant)

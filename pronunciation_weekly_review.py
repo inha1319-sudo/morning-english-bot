@@ -11,7 +11,6 @@ sys.stdout.reconfigure(encoding="utf-8")
 SCRIPT_DIR = Path(__file__).parent
 ENV_FILE = SCRIPT_DIR / ".env"
 FEEDBACK_FILE = SCRIPT_DIR / "발음피드백.md"
-PRONUNCIATION_INSTRUCTION_FILE = SCRIPT_DIR / "ChatGPT단어시험지시문.md"
 
 def load_env():
     """Load environment variables from .env file"""
